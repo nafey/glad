@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowTime : MonoBehaviour {
+public class UpdateTimeDisplay : MonoBehaviour {
 
 	public GameObject timeProvider;
 
