@@ -16,7 +16,7 @@
     }
 
     public void DoMove() {
-        this.target.TakeDamage(this.damage);
+        this.target.TakeDamage(this);
     }
 }
 

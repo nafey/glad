@@ -18,15 +18,16 @@ public class Character : MonoBehaviour {
         this.state = CharacterState.Waiting;
     }
 
-    public void TakeDamage(float damage) {
-		health = health - damage;
+    public void TakeDamage(Move m) {
+		this.health = this.health - m.damage;
+        this.state = CharacterState.Knockback;
 	}
 
     public void SelectMove(int i) {
         string _moveName = moves[i];
         MoveFactory _factory = new MoveFactory();
         this.selectedMove = _factory.GetMove(this, enemy, _moveName);
-        this.isMoving = true;
+        this.state = CharacterState.Attacking;
     }
 
 }
