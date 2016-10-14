@@ -9,6 +9,8 @@ public class Character : MonoBehaviour {
 	public float speed;
     public float maxHealth;
     public float health;
+    public float waitTime;
+    public float maxWaitTime;
 
     public bool isMoving;
     public List<string> moves;

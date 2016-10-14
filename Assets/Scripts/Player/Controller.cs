@@ -14,14 +14,16 @@ public class Controller : MonoBehaviour {
 	void ReachedTarget() {
 		if (this.mon.state == CharacterState.Attacking) {
 			Move m = this.mon.selectedMove;
-			m.DoMove();
+			m.target.TakeDamage(m);
 		} else if (this.mon.state == CharacterState.Knockback) {
 			// do nothing
 		}
 	}
 
 	void Update () {
-		if (this.mon.state != CharacterState.Waiting) {
+		if (this.mon.state == CharacterState.Waiting) {
+			this.mon.waitTime += time.GetDeltaTime();
+		} else {
 			//initialize if first iteration
 			if (!this.stateInitFlag) {
 				this.moveStart = this.transform.position;

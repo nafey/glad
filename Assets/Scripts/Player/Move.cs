@@ -14,10 +14,6 @@
         this.type = type;
         this.range = range;
     }
-
-    public void DoMove() {
-        this.target.TakeDamage(this);
-    }
 }
 
 
