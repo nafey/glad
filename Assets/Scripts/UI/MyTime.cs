@@ -14,7 +14,7 @@ public class MyTime : MonoBehaviour {
 	}
 
 	void Update () {
-		this.myDeltaTime = Time.deltaTime / this.scale;
+		this.myDeltaTime = Time.deltaTime * this.scale;
 		this.myTime += this.myDeltaTime;
 	}
 }

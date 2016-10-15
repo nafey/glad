@@ -4,12 +4,20 @@ public class Controller : MonoBehaviour {
 	public Character mon;
 	public MyTime time;
 
+	public bool isPlayerControlled = false;
+
 	private bool stateInitFlag = false;
 
 	private float moveRatio;
 	private Vector2 moveStart;
 	private Vector2 moveTarget;
 	private float moveStopRange;
+
+	public void UseMove(int i) {
+		this.mon.UseMove(i);
+		this.mon.state = CharacterState.Attacking;
+		this.time.scale = 1f;
+	} 
 
 	void ReachedTarget() {
 		if (this.mon.state == CharacterState.Attacking) {
@@ -23,6 +31,17 @@ public class Controller : MonoBehaviour {
 	void Update () {
 		if (this.mon.state == CharacterState.Waiting) {
 			this.mon.waitTime += time.GetDeltaTime();
+			
+			if (this.mon.waitTime > this.mon.maxWaitTime) {
+				this.mon.waitTime = 0;
+				this.mon.state = CharacterState.Ready;
+			}
+		} else if (this.mon.state == CharacterState.Ready) {
+			// handle the ai and player stuff here
+			if (this.isPlayerControlled) {
+				this.time.scale = 0f;
+			}
+
 		} else {
 			//initialize if first iteration
 			if (!this.stateInitFlag) {

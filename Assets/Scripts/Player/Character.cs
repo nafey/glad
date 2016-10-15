@@ -25,7 +25,7 @@ public class Character : MonoBehaviour {
         this.state = CharacterState.Knockback;
 	}
 
-    public void SelectMove(int i) {
+    public void UseMove(int i) {
         string _moveName = moves[i];
         MoveFactory _factory = new MoveFactory();
         this.selectedMove = _factory.GetMove(this, enemy, _moveName);
@@ -37,5 +37,6 @@ public class Character : MonoBehaviour {
 public enum CharacterState {
     Waiting,
     Attacking,
-    Knockback
+    Knockback,
+    Ready
 }
