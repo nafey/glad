@@ -10,7 +10,7 @@ public class Controller : MonoBehaviour {
 
 	private float moveRatio;
 	private Vector2 moveStart;
-	private Vector2 moveTarget;
+	private Transform moveTarget;
 	private float moveStopRange;
 
 	public void UseMove(int i) {
@@ -40,18 +40,27 @@ public class Controller : MonoBehaviour {
 			// handle the ai and player stuff here
 			if (this.isPlayerControlled) {
 				this.time.scale = 0f;
+			} else {
+				this.mon.UseMove(0);
 			}
-
 		} else {
 			//initialize if first iteration
 			if (!this.stateInitFlag) {
 				this.moveStart = this.transform.position;
 
 				if (this.mon.state == CharacterState.Attacking) {
-					this.moveTarget = this.mon.enemy.transform.position;
+					this.moveTarget = this.mon.enemy.transform;
 					this.moveStopRange = this.mon.selectedMove.range;
 				} else if (this.mon.state == CharacterState.Knockback) {
-					this.moveTarget = this.transform.position - (new Vector3(-2.5f, 0f, 0f));
+					int sign = 0;
+
+					if (this.transform.position.x > this.mon.enemy.transform.position.x) {
+						sign = 1;
+					} else {
+						sign = -1;
+					}
+
+					this.moveTarget = this.transform.position - (new Vector3(-2.5f, 0f, 0f)) * sign;
 					this.moveStopRange = 0.5f;
 				}
 
