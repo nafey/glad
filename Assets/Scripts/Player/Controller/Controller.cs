@@ -10,8 +10,21 @@ public class Controller : MonoBehaviour {
 
 	private float moveRatio;
 	private Vector2 moveStart;
-	private Transform moveTarget;
+	private Vector2 moveTarget;
 	private float moveStopRange;
+
+	public IControllerState controllerState;
+
+	public WaitingState waitingState;
+	public ReadyState readyState;
+	public KnockbackState knockbackState;
+	public AttackingState attackingState;
+
+	public Controller() {
+		this.waitingState = new WaitingState(this.mon.maxWaitTime, this.time);
+		this.readyState = new ReadyState(this.isPlayerControlled, this.time, this.mon);
+		
+	}
 
 	public void UseMove(int i) {
 		this.mon.UseMove(i);
@@ -49,7 +62,7 @@ public class Controller : MonoBehaviour {
 				this.moveStart = this.transform.position;
 
 				if (this.mon.state == CharacterState.Attacking) {
-					this.moveTarget = this.mon.enemy.transform;
+					this.moveTarget = this.mon.enemy.transform.position;
 					this.moveStopRange = this.mon.selectedMove.range;
 				} else if (this.mon.state == CharacterState.Knockback) {
 					int sign = 0;

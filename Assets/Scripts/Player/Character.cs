@@ -31,7 +31,6 @@ public class Character : MonoBehaviour {
         this.selectedMove = _factory.GetMove(this, enemy, _moveName);
         this.state = CharacterState.Attacking;
     }
-
 }
 
 public enum CharacterState {
